@@ -10,6 +10,7 @@ const ui = {
   skillLine: document.querySelector("#skillLine"),
   toast: document.querySelector("#toast"),
   launchBtn: document.querySelector("#launchBtn"),
+  recallBtn: document.querySelector("#recallBtn"),
   resetBtn: document.querySelector("#resetBtn"),
   upgradeModal: document.querySelector("#upgradeModal"),
   upgradeChoices: document.querySelector("#upgradeChoices"),
@@ -340,6 +341,7 @@ function updateHud() {
   ui.combo.textContent = String(state.combo);
   ui.multiplier.textContent = `x${state.multiplier.toFixed(1)}`;
   ui.launchBtn.disabled = state.status !== "aim";
+  ui.recallBtn.disabled = state.status !== "running";
   ui.mode.textContent = state.status === "aim" ? "瞄准中" : state.status === "running" ? "弹射中" : "选择技能";
   const tags = [];
   if (state.skills.splitCount) tags.push(`裂变${state.skills.splitCount}`);
@@ -372,6 +374,18 @@ function launchVolley() {
   state.queueTimer = 0;
   flash("弹射开始");
   updateHud();
+}
+
+function recallBalls() {
+  if (state.status !== "running") return;
+  for (const ball of state.activeBalls) {
+    addBurst(ball.x, ball.y, "#74f4a7", ball.mini ? 6 : 10);
+  }
+  state.activeBalls = [];
+  state.launched = state.skills.baseBalls;
+  state.returned = state.skills.baseBalls;
+  flash("弹球归位，结算本波");
+  finishVolley();
 }
 
 function spawnBall(isMini = false, source) {
@@ -988,6 +1002,7 @@ canvas.addEventListener("pointerup", (event) => {
 });
 
 ui.launchBtn.addEventListener("click", launchVolley);
+ui.recallBtn.addEventListener("click", recallBalls);
 ui.resetBtn.addEventListener("click", resetGame);
 ui.restartBtn.addEventListener("click", resetGame);
 window.addEventListener("resize", () => {

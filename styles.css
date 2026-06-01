@@ -123,14 +123,15 @@ button {
 
 .control-panel {
   display: grid;
-  grid-template-columns: 44px 1fr minmax(96px, 120px);
+  grid-template-columns: 44px 1fr 66px minmax(82px, 108px);
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   border-radius: 8px;
   padding: 10px;
 }
 
 .icon-button,
+.secondary-button,
 .primary-button {
   min-height: 44px;
   border-radius: 8px;
@@ -148,6 +149,14 @@ button {
   font-weight: 800;
 }
 
+.secondary-button {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: #dce7ff;
+  font-weight: 700;
+}
+
+.secondary-button:disabled,
 .primary-button:disabled {
   opacity: 0.45;
 }
@@ -251,5 +260,17 @@ button {
 
   .hud strong {
     font-size: 19px;
+  }
+}
+
+@media (max-width: 370px) {
+  .control-panel {
+    grid-template-columns: 42px 1fr 58px 76px;
+    gap: 6px;
+  }
+
+  .secondary-button,
+  .primary-button {
+    font-size: 14px;
   }
 }

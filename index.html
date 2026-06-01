@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#0b1020" />
     <title>数字弹球：下压循环 Demo</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=recall-1" />
   </head>
   <body>
     <main class="shell">
@@ -30,7 +30,7 @@
 
       <section class="game-wrap">
         <canvas id="game" aria-label="数字弹球游戏画布"></canvas>
-        <div class="toast" id="toast">拖动瞄准，松手或点发射</div>
+        <div class="toast" id="toast">拖动瞄准，循环太久可归位</div>
       </section>
 
       <section class="control-panel">
@@ -39,6 +39,7 @@
           <span id="mode">瞄准中</span>
           <strong id="skillLine">无技能</strong>
         </div>
+        <button class="secondary-button" id="recallBtn" aria-label="归位所有弹球">归位</button>
         <button class="primary-button" id="launchBtn">发射</button>
       </section>
     </main>
@@ -60,6 +61,6 @@
       </div>
     </div>
 
-    <script src="./app.js"></script>
+    <script src="./app.js?v=recall-1"></script>
   </body>
 </html>
